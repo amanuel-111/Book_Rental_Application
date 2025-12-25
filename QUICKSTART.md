@@ -1,26 +1,41 @@
-# Quick Start Guide
+# Quick Start Guide - MAMP MySQL Setup
 
-## 🚀 Get Started in 5 Minutes
+## 🚀 Get Started in 5 Minutes with MAMP
 
 ### 1. Prerequisites
 - Node.js (v16+)
-- PostgreSQL (v12+)
+- MAMP (with MySQL running on port 3306)
 - Git
 
 ### 2. Clone & Setup
 ```bash
-git clone <your-repo-url>
-cd book-rental-system
+git clone https://github.com/amanuel-111/Book_Rental_Application.git
+cd Book_Rental_Application
 node setup.js
 ```
 
-### 3. Database Setup
+### 3. MAMP MySQL Setup
 ```bash
-# Create PostgreSQL database
-createdb book_rental
+# 1. Start MAMP and ensure MySQL is running on port 3306
+# 2. Create database using phpMyAdmin or MySQL command line:
 
-# Update backend/.env with your database credentials
-# Then seed the database
+# Via phpMyAdmin:
+# - Open http://localhost/phpMyAdmin
+# - Create new database named 'book_rental'
+
+# Via MySQL command line:
+mysql -u root -p -h localhost -P 3306
+CREATE DATABASE book_rental;
+exit;
+
+# 3. Update backend/.env with MAMP credentials:
+# DB_HOST=localhost
+# DB_PORT=3306
+# DB_NAME=book_rental
+# DB_USER=root
+# DB_PASSWORD=root
+
+# 4. Seed the database
 cd backend
 npm run seed
 ```
@@ -33,6 +48,7 @@ npm run dev
 
 - **Frontend**: http://localhost:3000
 - **Backend**: http://localhost:5000
+- **MAMP**: http://localhost/phpMyAdmin (database management)
 
 ### 5. Login with Demo Accounts
 
@@ -62,45 +78,65 @@ npm run dev
 - Track rental history
 - Return books
 
-## 🔧 Troubleshooting
+## 🔧 MAMP Troubleshooting
 
-### Database Connection Issues
-1. Ensure PostgreSQL is running
-2. Check credentials in `backend/.env`
-3. Verify database exists: `psql -l | grep book_rental`
+### MySQL Connection Issues
+1. Ensure MAMP is running and MySQL port is 3306
+2. Check MAMP MySQL credentials (usually root/root)
+3. Verify database exists in phpMyAdmin
+4. Check `backend/.env` configuration
 
-### Port Already in Use
+### Port Conflicts
 ```bash
-# Kill processes on ports 3000 and 5000
+# If ports 3000 or 5000 are in use
 npx kill-port 3000 5000
 ```
 
-### Missing Dependencies
+### MAMP MySQL Not Starting
+1. Check MAMP logs for errors
+2. Ensure no other MySQL instances are running
+3. Try changing MySQL port in MAMP preferences
+4. Update `backend/.env` with new port
+
+### Database Access Denied
 ```bash
-# Reinstall all dependencies
-rm -rf node_modules backend/node_modules frontend/node_modules
-npm run setup
+# Reset MAMP MySQL password if needed
+# Or use MAMP's default credentials:
+# Username: root
+# Password: root (or empty)
 ```
 
-## 📚 Key Features Implemented
+## 📊 MAMP Database Management
 
-✅ **Role-based Access Control (CASL)**
-✅ **JWT Authentication**
-✅ **Server-side Filtering**
-✅ **Material-UI Components**
-✅ **PostgreSQL Database**
-✅ **Responsive Design**
-✅ **Production Ready**
+### Using phpMyAdmin
+- **URL**: http://localhost/phpMyAdmin
+- **Username**: root
+- **Password**: root (or check MAMP settings)
+
+### Direct MySQL Access
+```bash
+# Connect to MAMP MySQL
+mysql -u root -p -h localhost -P 3306
+
+# Show databases
+SHOW DATABASES;
+
+# Use book rental database
+USE book_rental;
+
+# Show tables
+SHOW TABLES;
+```
 
 ## 🏗️ Architecture
 
 ```
 book-rental-system/
-├── backend/          # Node.js + Express API
+├── backend/          # Node.js + Express + MySQL
 │   ├── src/
-│   │   ├── config/   # Database & environment
+│   │   ├── config/   # MySQL connection & schema
 │   │   ├── routes/   # API endpoints
-│   │   └── middleware/ # Auth & validation
+│   │   └── scripts/  # Database seeding
 ├── frontend/         # Next.js + Material-UI
 │   ├── src/
 │   │   ├── pages/    # Application pages
@@ -108,5 +144,15 @@ book-rental-system/
 │   │   └── contexts/ # React contexts
 └── README.md         # Full documentation
 ```
+
+## 📚 Key Features Implemented
+
+✅ **MySQL Database** (MAMP compatible)
+✅ **Role-based Access Control (CASL)**
+✅ **JWT Authentication**
+✅ **Server-side Filtering**
+✅ **Material-UI Components**
+✅ **Responsive Design**
+✅ **Production Ready**
 
 Need help? Check the full README.md for detailed documentation!

@@ -27,7 +27,7 @@ A production-ready full-stack book rental application with strict role-based acc
 
 ### Backend
 - **Node.js** with Express.js
-- **PostgreSQL** database
+- **MySQL** database (MAMP compatible)
 - **JWT** authentication
 - **CASL** for authorization
 - **Zod** for validation
@@ -45,7 +45,7 @@ A production-ready full-stack book rental application with strict role-based acc
 
 ### Prerequisites
 - Node.js (v16 or higher)
-- PostgreSQL (v12 or higher)
+- MAMP with MySQL (port 3306)
 - npm or yarn
 
 ### Installation
@@ -61,12 +61,14 @@ A production-ready full-stack book rental application with strict role-based acc
    node setup.js
    ```
 
-3. **Configure database**
+3. **Configure MAMP MySQL database**
    ```bash
-   # Create PostgreSQL database
-   createdb book_rental
+   # Start MAMP and ensure MySQL is running on port 3306
+   # Create database via phpMyAdmin or command line:
+   mysql -u root -p -h localhost -P 3306
+   CREATE DATABASE book_rental;
    
-   # Update backend/.env with your database credentials
+   # Update backend/.env with MAMP credentials
    # Then seed the database
    cd backend && npm run seed
    ```

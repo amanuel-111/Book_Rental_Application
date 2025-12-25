@@ -15,16 +15,16 @@ const generateToken = (userId, role) => {
 
 // Register
 router.post('/register', async (req, res) => {
-  const client = await pool.connect();
+  const connection = await pool.getConnection();
   
   try {
-    await client.query('BEGIN');
+    await connection.beginTransaction();
     
     const { email, password, role, firstName, lastName, phone, address, location } = req.body;
     
     // Check if user already exists
-    const existingUser = await client.query('SELECT id FROM users WHERE email = $1', [email]);
-    if (existingUser.rows.length > 0) {
+    const [existingUsers] = await connection.execute('SELECT id FROM users WHERE email = ?', [email]);
+    if (existingUsers.length > 0) {
       return res.status(400).json({ error: 'User already exists with this email' });
     }
     
@@ -32,12 +32,13 @@ router.post('/register', async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, 10);
     
     // Create user
-    const userResult = await client.query(
-      'INSERT INTO users (email, password, role) VALUES ($1, $2, $3) RETURNING id, email, role',
+    const [userResult] = await connection.execute(
+      'INSERT INTO users (email, password, role) VALUES (?, ?, ?)',
       [email, hashedPassword, role]
     );
     
-    const user = userResult.rows[0];
+    const userId = userResult.insertId;
+    const user = { id: userId, email, role };
     let ownerData = null;
     
     // If registering as owner, create owner record
@@ -46,21 +47,23 @@ router.post('/register', async (req, res) => {
         return res.status(400).json({ error: 'First name and last name are required for owners' });
       }
       
-      const ownerResult = await client.query(
-        'INSERT INTO owners (user_id, first_name, last_name, phone, address, location) VALUES ($1, $2, $3, $4, $5, $6) RETURNING id',
-        [user.id, firstName, lastName, phone || null, address || null, location || null]
+      const [ownerResult] = await connection.execute(
+        'INSERT INTO owners (user_id, first_name, last_name, phone, address, location) VALUES (?, ?, ?, ?, ?, ?)',
+        [userId, firstName, lastName, phone || null, address || null, location || null]
       );
+      
+      const ownerId = ownerResult.insertId;
       
       // Create wallet for owner
-      await client.query(
-        'INSERT INTO wallets (owner_id) VALUES ($1)',
-        [ownerResult.rows[0].id]
+      await connection.execute(
+        'INSERT INTO wallets (owner_id) VALUES (?)',
+        [ownerId]
       );
       
-      ownerData = { id: ownerResult.rows[0].id, is_approved: false };
+      ownerData = { id: ownerId, is_approved: false };
     }
     
-    await client.query('COMMIT');
+    await connection.commit();
     
     const token = generateToken(user.id, user.role);
     
@@ -76,11 +79,11 @@ router.post('/register', async (req, res) => {
     });
     
   } catch (error) {
-    await client.query('ROLLBACK');
+    await connection.rollback();
     console.error('Registration error:', error);
     res.status(500).json({ error: 'Internal server error' });
   } finally {
-    client.release();
+    connection.release();
   }
 });
 
@@ -90,19 +93,19 @@ router.post('/login', async (req, res) => {
     const { email, password } = req.body;
     
     // Get user with owner data
-    const result = await pool.query(`
+    const [users] = await pool.execute(`
       SELECT u.*, o.id as owner_id, o.is_approved as owner_approved,
              o.first_name, o.last_name, o.location
       FROM users u 
       LEFT JOIN owners o ON u.id = o.user_id 
-      WHERE u.email = $1 AND u.is_active = true
+      WHERE u.email = ? AND u.is_active = true
     `, [email]);
     
-    if (result.rows.length === 0) {
+    if (users.length === 0) {
       return res.status(401).json({ error: 'Invalid credentials' });
     }
     
-    const user = result.rows[0];
+    const user = users[0];
     
     // Check password
     const isValidPassword = await bcrypt.compare(password, user.password);
