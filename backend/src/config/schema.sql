@@ -80,7 +80,7 @@ CREATE TABLE IF NOT EXISTS rentals (
     owner_id INT,
     rental_price DECIMAL(8,2) NOT NULL,
     rental_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    due_date TIMESTAMP NOT NULL,
+    due_date DATETIME NOT NULL,
     return_date TIMESTAMP NULL,
     status ENUM('ACTIVE', 'RETURNED', 'OVERDUE') DEFAULT 'ACTIVE',
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -89,15 +89,3 @@ CREATE TABLE IF NOT EXISTS rentals (
     FOREIGN KEY (book_id) REFERENCES books(id) ON DELETE CASCADE,
     FOREIGN KEY (owner_id) REFERENCES owners(id) ON DELETE CASCADE
 );
-
--- Indexes for better performance
-CREATE INDEX IF NOT EXISTS idx_users_email ON users(email);
-CREATE INDEX IF NOT EXISTS idx_users_role ON users(role);
-CREATE INDEX IF NOT EXISTS idx_owners_user_id ON owners(user_id);
-CREATE INDEX IF NOT EXISTS idx_owners_approved ON owners(is_approved);
-CREATE INDEX IF NOT EXISTS idx_books_owner_id ON books(owner_id);
-CREATE INDEX IF NOT EXISTS idx_books_category_id ON books(category_id);
-CREATE INDEX IF NOT EXISTS idx_books_approved ON books(is_approved);
-CREATE INDEX IF NOT EXISTS idx_rentals_user_id ON rentals(user_id);
-CREATE INDEX IF NOT EXISTS idx_rentals_book_id ON rentals(book_id);
-CREATE INDEX IF NOT EXISTS idx_rentals_status ON rentals(status);
