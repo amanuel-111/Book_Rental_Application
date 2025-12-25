@@ -1,41 +1,49 @@
 import { useState, useEffect } from 'react';
-import {
-  Grid,
-  Card,
-  CardContent,
-  Typography,
-  Box,
-  Alert
-} from '@mui/material';
-import {
-  Book,
-  People,
-  Receipt,
-  AttachMoney
-} from '@mui/icons-material';
 import DashboardLayout from '../../components/Layout/DashboardLayout';
 import ProtectedRoute from '../../components/Auth/ProtectedRoute';
 import { useAuth } from '../../contexts/AuthContext';
 import api from '../../lib/api';
 
-const StatCard = ({ title, value, icon, color = 'primary' }) => (
-  <Card>
-    <CardContent>
-      <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-        <Box>
-          <Typography color="textSecondary" gutterBottom variant="overline">
-            {title}
-          </Typography>
-          <Typography variant="h4">
-            {value}
-          </Typography>
-        </Box>
-        <Box sx={{ color: `${color}.main` }}>
-          {icon}
-        </Box>
-      </Box>
-    </CardContent>
-  </Card>
+const StatCard = ({ title, value, icon, color = '#667eea' }) => (
+  <div style={{
+    background: 'white',
+    borderRadius: '12px',
+    padding: '1.5rem',
+    boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
+    border: '1px solid #e2e8f0'
+  }}>
+    <div style={{ 
+      display: 'flex', 
+      alignItems: 'center', 
+      justifyContent: 'space-between' 
+    }}>
+      <div>
+        <div style={{
+          color: '#718096',
+          fontSize: '0.875rem',
+          fontWeight: '500',
+          textTransform: 'uppercase',
+          letterSpacing: '0.05em',
+          marginBottom: '0.5rem'
+        }}>
+          {title}
+        </div>
+        <div style={{
+          fontSize: '2rem',
+          fontWeight: '700',
+          color: '#2d3748'
+        }}>
+          {value}
+        </div>
+      </div>
+      <div style={{ 
+        fontSize: '2rem',
+        color: color
+      }}>
+        {icon}
+      </div>
+    </div>
+  </div>
 );
 
 export default function Dashboard() {
@@ -94,94 +102,104 @@ export default function Dashboard() {
   };
 
   const renderAdminDashboard = () => (
-    <Grid container spacing={3}>
-      <Grid item xs={12} sm={6} md={3}>
-        <StatCard
-          title="Total Books"
-          value={stats.totalBooks || 0}
-          icon={<Book fontSize="large" />}
-          color="primary"
-        />
-      </Grid>
-      <Grid item xs={12} sm={6} md={3}>
-        <StatCard
-          title="Book Owners"
-          value={stats.totalOwners || 0}
-          icon={<People fontSize="large" />}
-          color="secondary"
-        />
-      </Grid>
-      <Grid item xs={12} sm={6} md={3}>
-        <StatCard
-          title="Total Rentals"
-          value={stats.totalRentals || 0}
-          icon={<Receipt fontSize="large" />}
-          color="success"
-        />
-      </Grid>
-    </Grid>
+    <div style={{ 
+      display: 'grid', 
+      gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', 
+      gap: '1.5rem' 
+    }}>
+      <StatCard
+        title="Total Books"
+        value={stats.totalBooks || 0}
+        icon="📚"
+        color="#667eea"
+      />
+      <StatCard
+        title="Book Owners"
+        value={stats.totalOwners || 0}
+        icon="👥"
+        color="#764ba2"
+      />
+      <StatCard
+        title="Total Rentals"
+        value={stats.totalRentals || 0}
+        icon="📋"
+        color="#48bb78"
+      />
+    </div>
   );
 
   const renderOwnerDashboard = () => (
-    <Grid container spacing={3}>
-      <Grid item xs={12} sm={6}>
-        <StatCard
-          title="My Books"
-          value={stats.myBooks || 0}
-          icon={<Book fontSize="large" />}
-          color="primary"
-        />
-      </Grid>
-      <Grid item xs={12} sm={6}>
-        <StatCard
-          title="My Rentals"
-          value={stats.myRentals || 0}
-          icon={<Receipt fontSize="large" />}
-          color="secondary"
-        />
-      </Grid>
-    </Grid>
+    <div style={{ 
+      display: 'grid', 
+      gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', 
+      gap: '1.5rem' 
+    }}>
+      <StatCard
+        title="My Books"
+        value={stats.myBooks || 0}
+        icon="📖"
+        color="#667eea"
+      />
+      <StatCard
+        title="My Rentals"
+        value={stats.myRentals || 0}
+        icon="📋"
+        color="#764ba2"
+      />
+    </div>
   );
 
   const renderUserDashboard = () => (
-    <Grid container spacing={3}>
-      <Grid item xs={12} sm={6}>
-        <StatCard
-          title="Available Books"
-          value={stats.availableBooks || 0}
-          icon={<Book fontSize="large" />}
-          color="primary"
-        />
-      </Grid>
-      <Grid item xs={12} sm={6}>
-        <StatCard
-          title="My Rentals"
-          value={stats.myRentals || 0}
-          icon={<Receipt fontSize="large" />}
-          color="secondary"
-        />
-      </Grid>
-    </Grid>
+    <div style={{ 
+      display: 'grid', 
+      gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', 
+      gap: '1.5rem' 
+    }}>
+      <StatCard
+        title="Available Books"
+        value={stats.availableBooks || 0}
+        icon="🔍"
+        color="#667eea"
+      />
+      <StatCard
+        title="My Rentals"
+        value={stats.myRentals || 0}
+        icon="📋"
+        color="#764ba2"
+      />
+    </div>
   );
 
   return (
     <ProtectedRoute>
       <DashboardLayout>
-        <Box sx={{ mb: 3 }}>
-          <Typography variant="h4" gutterBottom>
+        <div style={{ marginBottom: '2rem' }}>
+          <h1 style={{ 
+            fontSize: '2rem', 
+            fontWeight: '600', 
+            color: '#2d3748',
+            marginBottom: '0.5rem' 
+          }}>
             Welcome back, {user?.first_name || user?.email}!
-          </Typography>
-          <Typography variant="body1" color="textSecondary">
+          </h1>
+          <p style={{ color: '#718096', fontSize: '1rem' }}>
             {user?.role === 'ADMIN' && 'Manage the book rental system'}
             {user?.role === 'OWNER' && 'Manage your books and track revenue'}
             {user?.role === 'USER' && 'Discover and rent amazing books'}
-          </Typography>
-        </Box>
+          </p>
+        </div>
 
         {error && (
-          <Alert severity="error" sx={{ mb: 3 }}>
+          <div style={{
+            background: '#fed7d7',
+            color: '#c53030',
+            padding: '1rem',
+            borderRadius: '8px',
+            marginBottom: '2rem',
+            border: '1px solid #feb2b2'
+          }}>
             {error}
-          </Alert>
+          </div>
         )}
 
         {!loading && (

@@ -1,63 +1,24 @@
 import { useState } from 'react';
-import {
-  Box,
-  Drawer,
-  AppBar,
-  Toolbar,
-  List,
-  Typography,
-  Divider,
-  IconButton,
-  ListItem,
-  ListItemButton,
-  ListItemIcon,
-  ListItemText,
-  Avatar,
-  Menu,
-  MenuItem,
-  useTheme,
-  useMediaQuery
-} from '@mui/material';
-import {
-  Menu as MenuIcon,
-  Dashboard,
-  Book,
-  People,
-  Person,
-  Receipt,
-  Category,
-  BarChart,
-  AccountCircle,
-  Logout,
-  Settings
-} from '@mui/icons-material';
 import { useRouter } from 'next/router';
 import { useAuth } from '../../contexts/AuthContext';
-
-const drawerWidth = 240;
+import styles from '../../styles/dashboard.module.css';
 
 const DashboardLayout = ({ children }) => {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [anchorEl, setAnchorEl] = useState(null);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
   const { user, logout } = useAuth();
   const router = useRouter();
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
 
-  const handleProfileMenuOpen = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleProfileMenuClose = () => {
-    setAnchorEl(null);
+  const handleProfileToggle = () => {
+    setDropdownOpen(!dropdownOpen);
   };
 
   const handleLogout = () => {
-    handleProfileMenuClose();
+    setDropdownOpen(false);
     logout();
   };
 
@@ -65,7 +26,7 @@ const DashboardLayout = ({ children }) => {
     const items = [
       {
         text: 'Dashboard',
-        icon: <Dashboard />,
+        icon: '📊',
         path: '/dashboard',
         roles: ['ADMIN', 'OWNER', 'USER']
       }
@@ -75,25 +36,25 @@ const DashboardLayout = ({ children }) => {
       items.push(
         {
           text: 'Book Owners',
-          icon: <People />,
+          icon: '👥',
           path: '/dashboard/owners',
           roles: ['ADMIN']
         },
         {
           text: 'All Books',
-          icon: <Book />,
+          icon: '📚',
           path: '/dashboard/books',
           roles: ['ADMIN']
         },
         {
           text: 'All Rentals',
-          icon: <Receipt />,
+          icon: '📋',
           path: '/dashboard/rentals',
           roles: ['ADMIN']
         },
         {
           text: 'Statistics',
-          icon: <BarChart />,
+          icon: '📈',
           path: '/dashboard/stats',
           roles: ['ADMIN']
         }
@@ -104,19 +65,19 @@ const DashboardLayout = ({ children }) => {
       items.push(
         {
           text: 'My Books',
-          icon: <Book />,
+          icon: '📖',
           path: '/dashboard/my-books',
           roles: ['OWNER']
         },
         {
           text: 'My Rentals',
-          icon: <Receipt />,
+          icon: '📋',
           path: '/dashboard/my-rentals',
           roles: ['OWNER']
         },
         {
           text: 'Revenue',
-          icon: <BarChart />,
+          icon: '💰',
           path: '/dashboard/revenue',
           roles: ['OWNER']
         }
@@ -127,13 +88,13 @@ const DashboardLayout = ({ children }) => {
       items.push(
         {
           text: 'Browse Books',
-          icon: <Book />,
+          icon: '🔍',
           path: '/dashboard/browse',
           roles: ['USER']
         },
         {
           text: 'My Rentals',
-          icon: <Receipt />,
+          icon: '📋',
           path: '/dashboard/my-rentals',
           roles: ['USER']
         }
@@ -143,13 +104,13 @@ const DashboardLayout = ({ children }) => {
     items.push(
       {
         text: 'Categories',
-        icon: <Category />,
+        icon: '🏷️',
         path: '/dashboard/categories',
         roles: ['ADMIN', 'OWNER', 'USER']
       },
       {
         text: 'Profile',
-        icon: <Person />,
+        icon: '👤',
         path: '/dashboard/profile',
         roles: ['ADMIN', 'OWNER', 'USER']
       }
@@ -158,156 +119,103 @@ const DashboardLayout = ({ children }) => {
     return items.filter(item => item.roles.includes(user?.role));
   };
 
-  const drawer = (
-    <div>
-      <Toolbar>
-        <Typography variant="h6" noWrap component="div">
-          Book Rental
-        </Typography>
-      </Toolbar>
-      <Divider />
-      <List>
-        {getMenuItems().map((item) => (
-          <ListItem key={item.text} disablePadding>
-            <ListItemButton
-              selected={router.pathname === item.path}
-              onClick={() => router.push(item.path)}
-              sx={{
-                '&.Mui-selected': {
-                  backgroundColor: theme.palette.primary.main + '20',
-                  '&:hover': {
-                    backgroundColor: theme.palette.primary.main + '30',
-                  },
-                },
-              }}
-            >
-              <ListItemIcon
-                sx={{
-                  color: router.pathname === item.path ? theme.palette.primary.main : 'inherit'
-                }}
-              >
-                {item.icon}
-              </ListItemIcon>
-              <ListItemText 
-                primary={item.text}
-                sx={{
-                  color: router.pathname === item.path ? theme.palette.primary.main : 'inherit'
-                }}
-              />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
-    </div>
-  );
+  const getUserInitials = () => {
+    if (user?.first_name && user?.last_name) {
+      return `${user.first_name[0]}${user.last_name[0]}`.toUpperCase();
+    }
+    return user?.email?.[0]?.toUpperCase() || 'U';
+  };
 
   return (
-    <Box sx={{ display: 'flex' }}>
-      <AppBar
-        position="fixed"
-        sx={{
-          width: { md: `calc(100% - ${drawerWidth}px)` },
-          ml: { md: `${drawerWidth}px` },
-        }}
-      >
-        <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            edge="start"
-            onClick={handleDrawerToggle}
-            sx={{ mr: 2, display: { md: 'none' } }}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1 }}>
-            {user?.role === 'ADMIN' && 'Admin Dashboard'}
-            {user?.role === 'OWNER' && 'Owner Dashboard'}
-            {user?.role === 'USER' && 'User Dashboard'}
-          </Typography>
-          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-            <Typography variant="body2">
-              {user?.first_name || user?.email}
-            </Typography>
-            <IconButton
-              size="large"
-              aria-label="account of current user"
-              aria-controls="profile-menu"
-              aria-haspopup="true"
-              onClick={handleProfileMenuOpen}
-              color="inherit"
+    <div className={styles.dashboardContainer}>
+      {/* Mobile Overlay */}
+      <div 
+        className={`${styles.mobileOverlay} ${mobileOpen ? styles.active : ''}`}
+        onClick={handleDrawerToggle}
+      />
+      
+      {/* Sidebar */}
+      <div className={`${styles.sidebar} ${mobileOpen ? styles.mobileOpen : ''}`}>
+        <div className={styles.sidebarHeader}>
+          <h1 className={styles.brandTitle}>BookRent</h1>
+        </div>
+        
+        <nav className={styles.nav}>
+          {getMenuItems().map((item) => (
+            <button
+              key={item.text}
+              className={`${styles.navItem} ${router.pathname === item.path ? styles.active : ''}`}
+              onClick={() => {
+                router.push(item.path);
+                setMobileOpen(false);
+              }}
             >
-              <Avatar sx={{ width: 32, height: 32 }}>
-                <AccountCircle />
-              </Avatar>
-            </IconButton>
-          </Box>
-        </Toolbar>
-      </AppBar>
-      
-      <Menu
-        id="profile-menu"
-        anchorEl={anchorEl}
-        open={Boolean(anchorEl)}
-        onClose={handleProfileMenuClose}
-        onClick={handleProfileMenuClose}
-      >
-        <MenuItem onClick={() => router.push('/dashboard/profile')}>
-          <ListItemIcon>
-            <Settings fontSize="small" />
-          </ListItemIcon>
-          Profile Settings
-        </MenuItem>
-        <MenuItem onClick={handleLogout}>
-          <ListItemIcon>
-            <Logout fontSize="small" />
-          </ListItemIcon>
-          Logout
-        </MenuItem>
-      </Menu>
+              <span className={styles.navIcon}>{item.icon}</span>
+              {item.text}
+            </button>
+          ))}
+        </nav>
+      </div>
 
-      <Box
-        component="nav"
-        sx={{ width: { md: drawerWidth }, flexShrink: { md: 0 } }}
-      >
-        <Drawer
-          variant="temporary"
-          open={mobileOpen}
-          onClose={handleDrawerToggle}
-          ModalProps={{
-            keepMounted: true,
-          }}
-          sx={{
-            display: { xs: 'block', md: 'none' },
-            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
-          }}
-        >
-          {drawer}
-        </Drawer>
-        <Drawer
-          variant="permanent"
-          sx={{
-            display: { xs: 'none', md: 'block' },
-            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
-          }}
-          open
-        >
-          {drawer}
-        </Drawer>
-      </Box>
-      
-      <Box
-        component="main"
-        sx={{
-          flexGrow: 1,
-          p: 3,
-          width: { md: `calc(100% - ${drawerWidth}px)` },
-          mt: 8
-        }}
-      >
-        {children}
-      </Box>
-    </Box>
+      {/* Main Content */}
+      <div className={styles.mainContent}>
+        {/* Top Bar */}
+        <div className={styles.topBar}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+            <button 
+              className={styles.mobileMenuButton}
+              onClick={handleDrawerToggle}
+            >
+              ☰
+            </button>
+            <h2 className={styles.topBarTitle}>
+              {user?.role === 'ADMIN' && 'Admin Dashboard'}
+              {user?.role === 'OWNER' && 'Owner Dashboard'}
+              {user?.role === 'USER' && 'User Dashboard'}
+            </h2>
+          </div>
+          
+          <div className={styles.userSection}>
+            <span className={styles.userName}>
+              {user?.first_name || user?.email}
+            </span>
+            <div 
+              className={styles.userAvatar}
+              onClick={handleProfileToggle}
+            >
+              {getUserInitials()}
+            </div>
+            
+            {dropdownOpen && (
+              <div className={styles.dropdown}>
+                <button
+                  className={styles.dropdownItem}
+                  onClick={() => {
+                    router.push('/dashboard/profile');
+                    setDropdownOpen(false);
+                  }}
+                >
+                  <span className={styles.dropdownIcon}>⚙️</span>
+                  Profile Settings
+                </button>
+                <button
+                  className={styles.dropdownItem}
+                  onClick={handleLogout}
+                >
+                  <span className={styles.dropdownIcon}>🚪</span>
+                  Logout
+                </button>
+              </div>
+            )}
+          </div>
+        </div>
+        
+        {/* Page Content */}
+        <div className={styles.content}>
+          {children}
+        </div>
+      </div>
+    </div>
   );
 };
 
