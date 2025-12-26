@@ -3,9 +3,9 @@
 A production-ready full-stack book rental application with strict role-based access control using CASL.
 
 ![Node.js](https://img.shields.io/badge/Node.js-v16+-green)
-![React](https://img.shields.io/badge/React-18.2-blue)
-![PostgreSQL](https://img.shields.io/badge/PostgreSQL-12+-blue)
-![Material-UI](https://img.shields.io/badge/Material--UI-5.15-purple)
+![Next.js](https://img.shields.io/badge/Next.js-14.0-blue)
+![MySQL](https://img.shields.io/badge/MySQL-8.0+-blue)
+![CASL](https://img.shields.io/badge/CASL-Authorization-purple)
 
 ## ✨ Features
 
@@ -19,9 +19,11 @@ A production-ready full-stack book rental application with strict role-based acc
 - **📖 Book Management**: Upload, approve, and manage book inventory
 - **🔄 Rental System**: Complete rental workflow with availability tracking
 - **✅ Owner Management**: Admin approval system for book owners
-- **💰 Revenue Tracking**: Wallet system for owner earnings
+- **💰 Revenue Tracking**: Wallet system and revenue analytics for owners
+- **📊 Admin Statistics**: Comprehensive platform analytics and reporting
 - **🔍 Server-side Filtering**: All table filtering and searching handled server-side
-- **📱 Responsive Design**: Material-UI components with mobile-friendly design
+- **🎨 Custom Dark Theme**: Beautiful dark UI with consistent styling
+- **📱 Responsive Design**: Mobile-friendly responsive layout
 
 ## 🛠️ Tech Stack
 
@@ -30,16 +32,17 @@ A production-ready full-stack book rental application with strict role-based acc
 - **MySQL** database (MAMP compatible)
 - **JWT** authentication
 - **CASL** for authorization
-- **Zod** for validation
 - **bcryptjs** for password hashing
+- **Helmet** for security headers
+- **Rate limiting** for API protection
 
 ### Frontend
 - **Next.js** (React framework)
-- **Material-UI** for components and styling
-- **Material React Table** for data tables
+- **Custom CSS Modules** for styling
+- **Dark Theme** with consistent color scheme
 - **CASL** for client-side permissions
 - **Axios** for API calls
-- **React Hook Form** with Zod validation
+- **Context API** for state management
 
 ## 🚀 Quick Start
 
@@ -78,8 +81,8 @@ A production-ready full-stack book rental application with strict role-based acc
    npm run dev
    ```
 
-   - **Frontend**: http://localhost:3000
-   - **Backend**: http://localhost:5000
+   - **Frontend**: http://localhost:3001
+   - **Backend**: http://localhost:5003
 
 ### 🔑 Demo Accounts
 | Role  | Email | Password |
@@ -93,19 +96,23 @@ A production-ready full-stack book rental application with strict role-based acc
 ### Admin Dashboard
 - ✅ Approve/disable book owners
 - ✅ Approve books for rental
-- 📊 View system-wide statistics
+- 📊 View comprehensive platform statistics
+- 📈 Monitor activity trends and top performers
 - 🔧 Manage all books and rentals
+- 👥 Oversee user and owner management
 
 ### Owner Dashboard  
 - 📚 Upload and manage books
-- 💰 Track rental revenue and wallet balance
-- 📈 View rental history
-- ⚙️ Update book availability
+- 💰 Track rental revenue with detailed analytics
+- 📈 View revenue trends and transaction history
+- 📋 Monitor rental activity
+- ⚙️ Update book availability and pricing
 
 ### User Dashboard
-- 🔍 Browse approved books with server-side filtering
-- 📖 Rent available books
+- 🔍 Browse approved books with advanced filtering
+- 📖 Rent available books with real-time availability
 - 📋 Track rental history and due dates
+- 👤 Manage profile and account settings
 
 ## 🏗️ Project Structure
 
@@ -119,12 +126,13 @@ book-rental-system/
 │   │   ├── routes/         # API endpoints
 │   │   └── scripts/        # Database seeding
 │   └── package.json
-├── frontend/               # Next.js + Material-UI
+├── frontend/               # Next.js + Custom CSS
 │   ├── src/
 │   │   ├── components/     # Reusable UI components
 │   │   ├── contexts/       # React contexts (Auth)
 │   │   ├── lib/           # Utilities (API, CASL)
-│   │   └── pages/         # Application pages
+│   │   ├── pages/         # Application pages
+│   │   └── styles/        # CSS modules and global styles
 │   └── package.json
 ├── setup.js               # Automated setup script
 ├── QUICKSTART.md          # 5-minute setup guide
@@ -138,9 +146,10 @@ book-rental-system/
 - 🚦 Rate limiting on API endpoints
 - 🛡️ CORS protection
 - 🔰 Helmet security headers
-- ✅ Input validation with Zod
+- ✅ Input validation and sanitization
 - 🛡️ SQL injection protection with parameterized queries
 - 👮 Role-based access control with CASL
+- 🔐 Environment variable protection
 
 ## 🗄️ Database Schema
 
@@ -194,9 +203,9 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 🙏 Acknowledgments
 
 - Built with [Next.js](https://nextjs.org/)
-- UI components from [Material-UI](https://mui.com/)
 - Authorization with [CASL](https://casl.js.org/)
-- Database with [PostgreSQL](https://www.postgresql.org/)
+- Database with [MySQL](https://www.mysql.com/)
+- Styled with custom CSS modules
 
 ---
 

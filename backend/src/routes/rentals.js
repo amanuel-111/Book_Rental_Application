@@ -384,6 +384,113 @@ router.get('/stats/overview', async (req, res) => {
   }
 });
 
+// Get revenue statistics (owners only)
+router.get('/revenue-stats', requireRole(['OWNER']), async (req, res) => {
+  try {
+    const { period = '6months' } = req.query;
+    
+    let dateFilter = '';
+    switch (period) {
+      case '1month':
+        dateFilter = 'AND r.created_at >= DATE_SUB(NOW(), INTERVAL 1 MONTH)';
+        break;
+      case '3months':
+        dateFilter = 'AND r.created_at >= DATE_SUB(NOW(), INTERVAL 3 MONTH)';
+        break;
+      case '6months':
+        dateFilter = 'AND r.created_at >= DATE_SUB(NOW(), INTERVAL 6 MONTH)';
+        break;
+      case '1year':
+        dateFilter = 'AND r.created_at >= DATE_SUB(NOW(), INTERVAL 1 YEAR)';
+        break;
+    }
+    
+    const [stats] = await pool.execute(`
+      SELECT 
+        COALESCE(SUM(rental_price), 0) as totalRevenue,
+        COALESCE(SUM(CASE WHEN r.created_at >= DATE_SUB(NOW(), INTERVAL 1 MONTH) THEN rental_price ELSE 0 END), 0) as monthlyRevenue,
+        COUNT(*) as totalRentals,
+        COALESCE(AVG(rental_price), 0) as averageRental
+      FROM rentals r 
+      WHERE owner_id = ? ${dateFilter}
+    `, [req.user.owner_id]);
+    
+    res.json(stats[0]);
+    
+  } catch (error) {
+    console.error('Get revenue stats error:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+// Get revenue chart data (owners only)
+router.get('/revenue-chart', requireRole(['OWNER']), async (req, res) => {
+  try {
+    const { period = '6months' } = req.query;
+    
+    let monthsBack = 6;
+    switch (period) {
+      case '1month':
+        monthsBack = 1;
+        break;
+      case '3months':
+        monthsBack = 3;
+        break;
+      case '6months':
+        monthsBack = 6;
+        break;
+      case '1year':
+        monthsBack = 12;
+        break;
+    }
+    
+    const [chartData] = await pool.execute(`
+      SELECT 
+        DATE_FORMAT(r.created_at, '%b') as month,
+        COALESCE(SUM(rental_price), 0) as amount
+      FROM rentals r 
+      WHERE owner_id = ? 
+        AND r.created_at >= DATE_SUB(NOW(), INTERVAL ? MONTH)
+      GROUP BY YEAR(r.created_at), MONTH(r.created_at)
+      ORDER BY YEAR(r.created_at), MONTH(r.created_at)
+    `, [req.user.owner_id, monthsBack]);
+    
+    res.json({ chartData });
+    
+  } catch (error) {
+    console.error('Get revenue chart error:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+// Get recent transactions (owners only)
+router.get('/recent-transactions', requireRole(['OWNER']), async (req, res) => {
+  try {
+    const { limit = 10 } = req.query;
+    
+    const [transactions] = await pool.execute(`
+      SELECT 
+        r.id,
+        b.title as book_title,
+        CONCAT(u.first_name, ' ', u.last_name) as user_name,
+        r.rental_price as amount,
+        r.created_at as rental_date
+      FROM rentals r 
+      JOIN books b ON r.book_id = b.id 
+      JOIN users u ON r.user_id = u.id 
+      WHERE r.owner_id = ?
+      ORDER BY r.created_at DESC
+      LIMIT ?
+    `, [req.user.owner_id, parseInt(limit)]);
+    
+    res.json({ transactions });
+    
+  } catch (error) {
+    console.error('Get recent transactions error:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
 // Update overdue rentals (admin only - typically called by a cron job)
 router.patch('/update-overdue', requireRole(['ADMIN']), async (req, res) => {
   try {
