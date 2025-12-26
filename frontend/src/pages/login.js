@@ -50,8 +50,27 @@ export default function Login() {
     setLoading(false);
   };
 
-  const quickLogin = (email, password) => {
-    onSubmit({ email, password });
+  const quickLogin = async (email, password) => {
+    console.log('Quick login attempt:', email);
+    setLoading(true);
+    setError('');
+
+    try {
+      const result = await login(email, password);
+      
+      if (result.success) {
+        console.log('Quick login successful:', result.user);
+        router.push('/dashboard');
+      } else {
+        console.error('Quick login failed:', result.error);
+        setError(result.error);
+      }
+    } catch (error) {
+      console.error('Quick login error:', error);
+      setError('Login failed. Please try again.');
+    }
+    
+    setLoading(false);
   };
 
   return (
@@ -143,27 +162,48 @@ export default function Login() {
               <span>Admin:</span>
               <button 
                 onClick={() => quickLogin('admin@bookrental.com', 'admin123')}
-                style={{ background: 'none', border: 'none', color: '#22D3EE', cursor: 'pointer', textDecoration: 'underline' }}
+                disabled={loading}
+                style={{ 
+                  background: 'none', 
+                  border: 'none', 
+                  color: loading ? '#64748B' : '#22D3EE', 
+                  cursor: loading ? 'not-allowed' : 'pointer', 
+                  textDecoration: 'underline' 
+                }}
               >
-                admin@bookrental.com
+                {loading ? 'Logging in...' : 'admin@bookrental.com'}
               </button>
             </div>
             <div className={styles.demoAccount}>
               <span>Owner:</span>
               <button 
                 onClick={() => quickLogin('owner@example.com', 'owner123')}
-                style={{ background: 'none', border: 'none', color: '#22D3EE', cursor: 'pointer', textDecoration: 'underline' }}
+                disabled={loading}
+                style={{ 
+                  background: 'none', 
+                  border: 'none', 
+                  color: loading ? '#64748B' : '#22D3EE', 
+                  cursor: loading ? 'not-allowed' : 'pointer', 
+                  textDecoration: 'underline' 
+                }}
               >
-                owner@example.com
+                {loading ? 'Logging in...' : 'owner@example.com'}
               </button>
             </div>
             <div className={styles.demoAccount}>
               <span>User:</span>
               <button 
                 onClick={() => quickLogin('user@example.com', 'user123')}
-                style={{ background: 'none', border: 'none', color: '#22D3EE', cursor: 'pointer', textDecoration: 'underline' }}
+                disabled={loading}
+                style={{ 
+                  background: 'none', 
+                  border: 'none', 
+                  color: loading ? '#64748B' : '#22D3EE', 
+                  cursor: loading ? 'not-allowed' : 'pointer', 
+                  textDecoration: 'underline' 
+                }}
               >
-                user@example.com
+                {loading ? 'Logging in...' : 'user@example.com'}
               </button>
             </div>
           </div>
