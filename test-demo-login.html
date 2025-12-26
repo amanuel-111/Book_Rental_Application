@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Demo Login Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; background: #0F172A; color: #F4F4F4; }
+        button { 
+            background: #22D3EE; 
+            color: #0F172A; 
+            border: none; 
+            padding: 10px 20px; 
+            margin: 10px; 
+            border-radius: 5px; 
+            cursor: pointer; 
+        }
+        button:hover { background: #0891b2; }
+        .result { 
+            margin: 20px 0; 
+            padding: 15px; 
+            border-radius: 5px; 
+            background: #1e293b; 
+            border: 1px solid #334155; 
+        }
+        .success { border-color: #22D3EE; }
+        .error { border-color: #ef4444; }
+    </style>
+</head>
+<body>
+    <h1>Demo Login Test</h1>
+    <p>Testing the demo login functionality:</p>
+    
+    <button onclick="testLogin('admin@bookrental.com', 'admin123')">Test Admin Login</button>
+    <button onclick="testLogin('owner@example.com', 'owner123')">Test Owner Login</button>
+    <button onclick="testLogin('user@example.com', 'user123')">Test User Login</button>
+    
+    <div id="result" class="result" style="display: none;"></div>
+
+    <script>
+        async function testLogin(email, password) {
+            const resultDiv = document.getElementById('result');
+            resultDiv.style.display = 'block';
+            resultDiv.innerHTML = `Testing login for ${email}...`;
+            resultDiv.className = 'result';
+            
+            try {
+                const response = await fetch('http://localhost:5002/api/auth/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ email, password })
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    resultDiv.className = 'result success';
+                    resultDiv.innerHTML = `
+                        <h3>✅ Login Successful!</h3>
+                        <p><strong>Email:</strong> ${data.user.email}</p>
+                        <p><strong>Role:</strong> ${data.user.role}</p>
+                        <p><strong>Token:</strong> ${data.token.substring(0, 50)}...</p>
+                    `;
+                } else {
+                    resultDiv.className = 'result error';
+                    resultDiv.innerHTML = `
+                        <h3>❌ Login Failed</h3>
+                        <p><strong>Error:</strong> ${data.error}</p>
+                    `;
+                }
+            } catch (error) {
+                resultDiv.className = 'result error';
+                resultDiv.innerHTML = `
+                    <h3>❌ Network Error</h3>
+                    <p><strong>Error:</strong> ${error.message}</p>
+                    <p>Make sure the backend is running on http://localhost:5002</p>
+                `;
+            }
+        }
+    </script>
+</body>
+</html>
