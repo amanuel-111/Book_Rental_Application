@@ -1,6 +1,6 @@
 /* Custom Authentication Styles */
 .authContainer {
-  min-height: 100vh;
+  min-height: calc(100vh - 80px); /* Subtract header height */
   display: flex;
   background: linear-gradient(135deg, #0F172A 0%, #1e293b 100%);
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
