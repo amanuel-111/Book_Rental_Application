@@ -5,6 +5,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { useAuth } from '../contexts/AuthContext';
 import Header from '../components/Layout/Header';
+import Footer from '../components/Layout/Footer';
 import styles from '../styles/auth.module.css';
 
 const loginSchema = z.object({
@@ -213,6 +214,7 @@ export default function Login() {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 }

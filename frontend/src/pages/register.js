@@ -5,6 +5,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { useAuth } from '../contexts/AuthContext';
 import Header from '../components/Layout/Header';
+import Footer from '../components/Layout/Footer';
 import styles from '../styles/auth.module.css';
 
 const registerSchema = z.object({
@@ -288,6 +289,7 @@ export default function Register() {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 }
