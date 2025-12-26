@@ -11,17 +11,18 @@
     "setup": "npm run setup-db && npm run seed"
   },
   "dependencies": {
-    "express": "^4.18.2",
-    "cors": "^2.8.5",
-    "helmet": "^7.1.0",
-    "dotenv": "^16.3.1",
-    "mysql2": "^3.6.5",
+    "@casl/ability": "^6.7.5",
+    "axios": "^1.13.2",
     "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "express-rate-limit": "^7.1.5",
+    "helmet": "^7.1.0",
     "jsonwebtoken": "^9.0.2",
-    "@casl/ability": "^6.5.0",
-    "zod": "^3.22.4",
     "multer": "^1.4.5-lts.1",
-    "express-rate-limit": "^7.1.5"
+    "mysql2": "^3.6.5",
+    "zod": "^3.22.4"
   },
   "devDependencies": {
     "nodemon": "^3.0.2"
