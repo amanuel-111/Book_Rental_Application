@@ -143,7 +143,7 @@ export default function Login() {
               <span>Admin:</span>
               <button 
                 onClick={() => quickLogin('admin@bookrental.com', 'admin123')}
-                style={{ background: 'none', border: 'none', color: '#667eea', cursor: 'pointer', textDecoration: 'underline' }}
+                style={{ background: 'none', border: 'none', color: '#22D3EE', cursor: 'pointer', textDecoration: 'underline' }}
               >
                 admin@bookrental.com
               </button>
@@ -152,7 +152,7 @@ export default function Login() {
               <span>Owner:</span>
               <button 
                 onClick={() => quickLogin('owner@example.com', 'owner123')}
-                style={{ background: 'none', border: 'none', color: '#667eea', cursor: 'pointer', textDecoration: 'underline' }}
+                style={{ background: 'none', border: 'none', color: '#22D3EE', cursor: 'pointer', textDecoration: 'underline' }}
               >
                 owner@example.com
               </button>
@@ -161,7 +161,7 @@ export default function Login() {
               <span>User:</span>
               <button 
                 onClick={() => quickLogin('user@example.com', 'user123')}
-                style={{ background: 'none', border: 'none', color: '#667eea', cursor: 'pointer', textDecoration: 'underline' }}
+                style={{ background: 'none', border: 'none', color: '#22D3EE', cursor: 'pointer', textDecoration: 'underline' }}
               >
                 user@example.com
               </button>

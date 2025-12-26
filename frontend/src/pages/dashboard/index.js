@@ -4,14 +4,26 @@ import ProtectedRoute from '../../components/Auth/ProtectedRoute';
 import { useAuth } from '../../contexts/AuthContext';
 import api from '../../lib/api';
 
-const StatCard = ({ title, value, icon, color = '#667eea' }) => (
+const StatCard = ({ title, value, icon, color = '#22D3EE' }) => (
   <div style={{
-    background: 'white',
+    background: '#1e293b',
     borderRadius: '12px',
     padding: '1.5rem',
-    boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
-    border: '1px solid #e2e8f0'
-  }}>
+    boxShadow: '0 4px 6px rgba(0, 0, 0, 0.3)',
+    border: '1px solid #334155',
+    transition: 'all 0.3s ease'
+  }}
+  onMouseEnter={(e) => {
+    e.currentTarget.style.transform = 'translateY(-2px)';
+    e.currentTarget.style.boxShadow = '0 8px 25px rgba(34, 211, 238, 0.2)';
+    e.currentTarget.style.borderColor = '#22D3EE';
+  }}
+  onMouseLeave={(e) => {
+    e.currentTarget.style.transform = 'translateY(0)';
+    e.currentTarget.style.boxShadow = '0 4px 6px rgba(0, 0, 0, 0.3)';
+    e.currentTarget.style.borderColor = '#334155';
+  }}
+  >
     <div style={{ 
       display: 'flex', 
       alignItems: 'center', 
@@ -19,7 +31,7 @@ const StatCard = ({ title, value, icon, color = '#667eea' }) => (
     }}>
       <div>
         <div style={{
-          color: '#718096',
+          color: '#64748B',
           fontSize: '0.875rem',
           fontWeight: '500',
           textTransform: 'uppercase',
@@ -31,7 +43,7 @@ const StatCard = ({ title, value, icon, color = '#667eea' }) => (
         <div style={{
           fontSize: '2rem',
           fontWeight: '700',
-          color: '#2d3748'
+          color: '#F4F4F4'
         }}>
           {value}
         </div>
@@ -111,13 +123,13 @@ export default function Dashboard() {
         title="Total Books"
         value={stats.totalBooks || 0}
         icon="📚"
-        color="#667eea"
+        color="#22D3EE"
       />
       <StatCard
         title="Book Owners"
         value={stats.totalOwners || 0}
         icon="👥"
-        color="#764ba2"
+        color="#0891b2"
       />
       <StatCard
         title="Total Rentals"
@@ -138,13 +150,13 @@ export default function Dashboard() {
         title="My Books"
         value={stats.myBooks || 0}
         icon="📖"
-        color="#667eea"
+        color="#22D3EE"
       />
       <StatCard
         title="My Rentals"
         value={stats.myRentals || 0}
         icon="📋"
-        color="#764ba2"
+        color="#0891b2"
       />
     </div>
   );
@@ -159,13 +171,13 @@ export default function Dashboard() {
         title="Available Books"
         value={stats.availableBooks || 0}
         icon="🔍"
-        color="#667eea"
+        color="#22D3EE"
       />
       <StatCard
         title="My Rentals"
         value={stats.myRentals || 0}
         icon="📋"
-        color="#764ba2"
+        color="#0891b2"
       />
     </div>
   );
@@ -177,12 +189,12 @@ export default function Dashboard() {
           <h1 style={{ 
             fontSize: '2rem', 
             fontWeight: '600', 
-            color: '#2d3748',
+            color: '#F4F4F4',
             marginBottom: '0.5rem' 
           }}>
             Welcome back, {user?.first_name || user?.email}!
           </h1>
-          <p style={{ color: '#718096', fontSize: '1rem' }}>
+          <p style={{ color: '#64748B', fontSize: '1rem' }}>
             {user?.role === 'ADMIN' && 'Manage the book rental system'}
             {user?.role === 'OWNER' && 'Manage your books and track revenue'}
             {user?.role === 'USER' && 'Discover and rent amazing books'}
@@ -191,12 +203,12 @@ export default function Dashboard() {
 
         {error && (
           <div style={{
-            background: '#fed7d7',
-            color: '#c53030',
+            background: 'rgba(239, 68, 68, 0.1)',
+            color: '#ef4444',
             padding: '1rem',
             borderRadius: '8px',
             marginBottom: '2rem',
-            border: '1px solid #feb2b2'
+            border: '1px solid rgba(239, 68, 68, 0.3)'
           }}>
             {error}
           </div>
