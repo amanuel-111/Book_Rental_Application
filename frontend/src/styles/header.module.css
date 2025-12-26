@@ -1,8 +1,8 @@
 /* Header Styles */
 .header {
-  background: rgba(255, 255, 255, 0.95);
+  background: rgba(15, 23, 42, 0.95);
   backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+  border-bottom: 1px solid rgba(51, 65, 85, 0.8);
   position: sticky;
   top: 0;
   z-index: 1000;
@@ -34,12 +34,13 @@
 
 .logoIcon {
   font-size: 1.8rem;
+  color: #22D3EE;
 }
 
 .logoText {
   font-size: 1.5rem;
   font-weight: 700;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #22D3EE 0%, #0891b2 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -55,7 +56,7 @@
 .navLink {
   background: none;
   border: none;
-  color: #4a5568;
+  color: #F4F4F4;
   font-weight: 500;
   font-size: 1rem;
   cursor: pointer;
@@ -65,7 +66,7 @@
 }
 
 .navLink:hover {
-  color: #667eea;
+  color: #22D3EE;
 }
 
 .navLink::after {
@@ -75,7 +76,7 @@
   left: 0;
   width: 0;
   height: 2px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #22D3EE 0%, #0891b2 100%);
   transition: width 0.3s ease;
 }
 
@@ -98,8 +99,8 @@
 
 .loginBtn {
   background: none;
-  border: 1px solid #e2e8f0;
-  color: #4a5568;
+  border: 1px solid #334155;
+  color: #F4F4F4;
   padding: 0.5rem 1rem;
   border-radius: 6px;
   font-weight: 500;
@@ -108,13 +109,13 @@
 }
 
 .loginBtn:hover {
-  border-color: #667eea;
-  color: #667eea;
+  border-color: #22D3EE;
+  color: #22D3EE;
 }
 
 .registerBtn {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
+  background: linear-gradient(135deg, #22D3EE 0%, #0891b2 100%);
+  color: #0F172A;
   border: none;
   padding: 0.5rem 1rem;
   border-radius: 6px;
@@ -125,7 +126,7 @@
 
 .registerBtn:hover {
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+  box-shadow: 0 4px 12px rgba(34, 211, 238, 0.4);
 }
 
 /* User Menu */
@@ -136,8 +137,8 @@
 }
 
 .dashboardBtn {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
+  background: linear-gradient(135deg, #22D3EE 0%, #0891b2 100%);
+  color: #0F172A;
   border: none;
   padding: 0.5rem 1rem;
   border-radius: 6px;
@@ -148,13 +149,13 @@
 
 .dashboardBtn:hover {
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+  box-shadow: 0 4px 12px rgba(34, 211, 238, 0.4);
 }
 
 .logoutBtn {
   background: none;
-  border: 1px solid #e2e8f0;
-  color: #4a5568;
+  border: 1px solid #334155;
+  color: #F4F4F4;
   padding: 0.5rem 1rem;
   border-radius: 6px;
   font-weight: 500;
@@ -163,8 +164,8 @@
 }
 
 .logoutBtn:hover {
-  border-color: #e53e3e;
-  color: #e53e3e;
+  border-color: #ef4444;
+  color: #ef4444;
 }
 
 /* Mobile Menu Button */
@@ -173,7 +174,7 @@
   background: none;
   border: none;
   font-size: 1.5rem;
-  color: #4a5568;
+  color: #F4F4F4;
   cursor: pointer;
   padding: 0.5rem;
 }
@@ -186,15 +187,16 @@
 .mobileMenuBtn:hover .menuIcon,
 .mobileMenuBtn:hover .closeIcon {
   transform: scale(1.1);
+  color: #22D3EE;
 }
 
 /* Mobile Menu */
 .mobileMenu {
   display: none;
-  background: white;
-  border-top: 1px solid #e2e8f0;
+  background: #1e293b;
+  border-top: 1px solid #334155;
   padding: 1rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
 .mobileNav {
@@ -207,7 +209,7 @@
 .mobileNavLink {
   background: none;
   border: none;
-  color: #4a5568;
+  color: #F4F4F4;
   font-weight: 500;
   padding: 0.75rem;
   text-align: left;
@@ -217,8 +219,8 @@
 }
 
 .mobileNavLink:hover {
-  background: #f7fafc;
-  color: #667eea;
+  background: #0F172A;
+  color: #22D3EE;
 }
 
 .mobileAuth {
@@ -226,7 +228,7 @@
   flex-direction: column;
   gap: 0.5rem;
   padding-top: 1rem;
-  border-top: 1px solid #e2e8f0;
+  border-top: 1px solid #334155;
 }
 
 .mobileLoginBtn,
@@ -244,31 +246,31 @@
 .mobileLoginBtn,
 .mobileLogoutBtn {
   background: none;
-  border: 1px solid #e2e8f0;
-  color: #4a5568;
+  border: 1px solid #334155;
+  color: #F4F4F4;
 }
 
 .mobileLoginBtn:hover {
-  border-color: #667eea;
-  color: #667eea;
+  border-color: #22D3EE;
+  color: #22D3EE;
 }
 
 .mobileLogoutBtn:hover {
-  border-color: #e53e3e;
-  color: #e53e3e;
+  border-color: #ef4444;
+  color: #ef4444;
 }
 
 .mobileRegisterBtn,
 .mobileDashboardBtn {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
+  background: linear-gradient(135deg, #22D3EE 0%, #0891b2 100%);
+  color: #0F172A;
   border: none;
 }
 
 .mobileRegisterBtn:hover,
 .mobileDashboardBtn:hover {
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+  box-shadow: 0 4px 12px rgba(34, 211, 238, 0.4);
 }
 
 /* Mobile Responsive */

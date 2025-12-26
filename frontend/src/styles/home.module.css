@@ -11,8 +11,8 @@
 
 /* Hero Section */
 .hero {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
+  background: linear-gradient(135deg, #0F172A 0%, #1e293b 100%);
+  color: #F4F4F4;
   padding: 4rem 0;
   text-align: center;
   position: relative;
@@ -26,7 +26,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="books" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse"><text x="10" y="15" text-anchor="middle" font-size="12" fill="rgba(255,255,255,0.1)">📚</text></pattern></defs><rect width="100" height="100" fill="url(%23books)"/></svg>');
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="books" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse"><text x="10" y="15" text-anchor="middle" font-size="12" fill="rgba(34,211,238,0.1)">📚</text></pattern></defs><rect width="100" height="100" fill="url(%23books)"/></svg>');
   opacity: 0.1;
 }
 
@@ -43,6 +43,10 @@
   font-weight: 700;
   margin-bottom: 1rem;
   line-height: 1.2;
+  background: linear-gradient(135deg, #22D3EE 0%, #F4F4F4 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .heroSubtitle {
@@ -53,6 +57,7 @@
   margin-left: auto;
   margin-right: auto;
   line-height: 1.6;
+  color: #64748B;
 }
 
 .heroButtons {
@@ -75,30 +80,31 @@
 }
 
 .heroBtnPrimary {
-  background: white;
-  color: #667eea;
+  background: #22D3EE;
+  color: #0F172A;
 }
 
 .heroBtnPrimary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 8px 25px rgba(34, 211, 238, 0.4);
+  background: #0891b2;
 }
 
 .heroBtnSecondary {
-  background: rgba(255, 255, 255, 0.2);
-  color: white;
-  border: 2px solid rgba(255, 255, 255, 0.3);
+  background: rgba(34, 211, 238, 0.1);
+  color: #22D3EE;
+  border: 2px solid rgba(34, 211, 238, 0.3);
 }
 
 .heroBtnSecondary:hover {
-  background: rgba(255, 255, 255, 0.3);
+  background: rgba(34, 211, 238, 0.2);
   transform: translateY(-2px);
 }
 
 /* Features Section */
 .features {
   padding: 4rem 0;
-  background: #f7fafc;
+  background: #1e293b;
 }
 
 .featuresContainer {
@@ -111,14 +117,14 @@
   text-align: center;
   font-size: 2.5rem;
   font-weight: 700;
-  color: #2d3748;
+  color: #F4F4F4;
   margin-bottom: 1rem;
 }
 
 .sectionSubtitle {
   text-align: center;
   font-size: 1.2rem;
-  color: #718096;
+  color: #64748B;
   margin-bottom: 3rem;
   max-width: 600px;
   margin-left: auto;
@@ -132,43 +138,45 @@
 }
 
 .featureCard {
-  background: white;
+  background: #0F172A;
   padding: 2rem;
   border-radius: 12px;
   text-align: center;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-  border: 1px solid #e2e8f0;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  border: 1px solid #334155;
   transition: all 0.3s ease;
 }
 
 .featureCard:hover {
   transform: translateY(-4px);
-  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 12px 25px rgba(34, 211, 238, 0.2);
+  border-color: #22D3EE;
 }
 
 .featureIcon {
   font-size: 3rem;
   margin-bottom: 1rem;
   display: block;
+  color: #22D3EE;
 }
 
 .featureTitle {
   font-size: 1.3rem;
   font-weight: 600;
-  color: #2d3748;
+  color: #F4F4F4;
   margin-bottom: 1rem;
 }
 
 .featureDescription {
-  color: #718096;
+  color: #64748B;
   line-height: 1.6;
 }
 
 /* Stats Section */
 .stats {
   padding: 4rem 0;
-  background: linear-gradient(135deg, #2d3748 0%, #4a5568 100%);
-  color: white;
+  background: linear-gradient(135deg, #0F172A 0%, #1e293b 100%);
+  color: #F4F4F4;
 }
 
 .statsContainer {
@@ -191,7 +199,7 @@
 .statNumber {
   font-size: 3rem;
   font-weight: 700;
-  color: #667eea;
+  color: #22D3EE;
   display: block;
   margin-bottom: 0.5rem;
 }
@@ -199,12 +207,13 @@
 .statLabel {
   font-size: 1.1rem;
   opacity: 0.9;
+  color: #64748B;
 }
 
 /* How It Works Section */
 .howItWorks {
   padding: 4rem 0;
-  background: white;
+  background: #1e293b;
 }
 
 .howItWorksContainer {
@@ -232,8 +241,8 @@
   justify-content: center;
   width: 60px;
   height: 60px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
+  background: linear-gradient(135deg, #22D3EE 0%, #0891b2 100%);
+  color: #0F172A;
   border-radius: 50%;
   font-size: 1.5rem;
   font-weight: 700;
@@ -243,20 +252,20 @@
 .stepTitle {
   font-size: 1.2rem;
   font-weight: 600;
-  color: #2d3748;
+  color: #F4F4F4;
   margin-bottom: 1rem;
 }
 
 .stepDescription {
-  color: #718096;
+  color: #64748B;
   line-height: 1.6;
 }
 
 /* CTA Section */
 .cta {
   padding: 4rem 0;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
+  background: linear-gradient(135deg, #22D3EE 0%, #0891b2 100%);
+  color: #0F172A;
   text-align: center;
 }
 

@@ -2,14 +2,14 @@
 .dashboardContainer {
   display: flex;
   min-height: 100vh;
-  background-color: #f7fafc;
+  background-color: #0F172A;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 .sidebar {
   width: 240px;
-  background: white;
-  border-right: 1px solid #e2e8f0;
+  background: #1e293b;
+  border-right: 1px solid #334155;
   position: fixed;
   height: 100vh;
   overflow-y: auto;
@@ -18,14 +18,18 @@
 
 .sidebarHeader {
   padding: 1rem;
-  border-bottom: 1px solid #e2e8f0;
+  border-bottom: 1px solid #334155;
 }
 
 .brandTitle {
   font-size: 1.5rem;
   font-weight: 700;
-  color: #2d3748;
+  color: #F4F4F4;
   margin: 0;
+  background: linear-gradient(135deg, #22D3EE 0%, #F4F4F4 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .nav {
@@ -36,7 +40,7 @@
   display: flex;
   align-items: center;
   padding: 0.75rem 1rem;
-  color: #4a5568;
+  color: #64748B;
   text-decoration: none;
   transition: all 0.2s ease;
   cursor: pointer;
@@ -47,13 +51,13 @@
 }
 
 .navItem:hover {
-  background-color: #f7fafc;
-  color: #667eea;
+  background-color: #0F172A;
+  color: #22D3EE;
 }
 
 .navItem.active {
-  background-color: #667eea;
-  color: white;
+  background-color: #22D3EE;
+  color: #0F172A;
 }
 
 .navIcon {
@@ -69,8 +73,8 @@
 }
 
 .topBar {
-  background: white;
-  border-bottom: 1px solid #e2e8f0;
+  background: #1e293b;
+  border-bottom: 1px solid #334155;
   padding: 1rem 2rem;
   display: flex;
   justify-content: space-between;
@@ -83,7 +87,7 @@
 .topBarTitle {
   font-size: 1.5rem;
   font-weight: 600;
-  color: #2d3748;
+  color: #F4F4F4;
   margin: 0;
 }
 
@@ -95,7 +99,7 @@
 }
 
 .userName {
-  color: #4a5568;
+  color: #64748B;
   font-weight: 500;
 }
 
@@ -103,11 +107,11 @@
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #22D3EE 0%, #0891b2 100%);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
+  color: #0F172A;
   font-weight: 600;
   cursor: pointer;
   transition: transform 0.2s ease;
@@ -121,10 +125,10 @@
   position: absolute;
   top: 100%;
   right: 0;
-  background: white;
-  border: 1px solid #e2e8f0;
+  background: #1e293b;
+  border: 1px solid #334155;
   border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
   min-width: 200px;
   z-index: 1000;
   margin-top: 0.5rem;
@@ -134,7 +138,7 @@
   display: flex;
   align-items: center;
   padding: 0.75rem 1rem;
-  color: #4a5568;
+  color: #64748B;
   text-decoration: none;
   transition: background-color 0.2s ease;
   cursor: pointer;
@@ -145,7 +149,8 @@
 }
 
 .dropdownItem:hover {
-  background-color: #f7fafc;
+  background-color: #0F172A;
+  color: #22D3EE;
 }
 
 .dropdownIcon {
@@ -163,7 +168,7 @@
   background: none;
   border: none;
   font-size: 1.5rem;
-  color: #4a5568;
+  color: #F4F4F4;
   cursor: pointer;
 }
 
@@ -174,7 +179,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.7);
   z-index: 999;
 }
 
