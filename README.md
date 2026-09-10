@@ -142,12 +142,7 @@ Ensure your MySQL server is running. You can use standard MySQL or a local envir
    ```
 
 ### 🔑 Demo Accounts
-The seed script will automatically create the following development accounts:
-| Role  | Email | Password |
-|-------|-------|----------|
-| Admin | admin@bookrental.com | admin123 |
-| Owner | owner@example.com | owner123 |
-| User  | user@example.com | user123 |
+The seed script will automatically create development accounts for Admin, Owner, and User roles. For security reasons, the default passwords are not listed publicly. Please refer to the source code of `backend/src/scripts/seed.js` for the exact credentials generated during seeding.
 
 ## 🏃 Running the Application
 

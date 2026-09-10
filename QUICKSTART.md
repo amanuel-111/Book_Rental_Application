@@ -56,13 +56,7 @@ npm run dev
 - **Backend API**: http://localhost:5003
 
 ### 5. Login with Demo Accounts
-The seed script creates these accounts for development:
-
-| Role  | Email | Password |
-|-------|-------|----------|
-| Admin | admin@bookrental.com | admin123 |
-| Owner | owner@example.com | owner123 |
-| User  | user@example.com | user123 |
+The seed script creates development accounts for all three roles. Check `backend/src/scripts/seed.js` for the exact credentials.
 
 ## 🎯 What You Can Do
 
