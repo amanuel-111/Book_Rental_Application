@@ -60,8 +60,8 @@ try {
   
   console.log('\n✅ Setup completed successfully!');
   console.log('\n📋 Next steps:');
-  console.log('1. Update backend/.env with your PostgreSQL credentials');
-  console.log('2. Create the PostgreSQL database: createdb book_rental');
+  console.log('1. Update backend/.env with your MySQL credentials');
+  console.log('2. Create the MySQL database: CREATE DATABASE book_rental;');
   console.log('3. Run database seed: cd backend && npm run seed');
   console.log('4. Start the application: npm run dev');
   console.log('\n🔑 Demo accounts will be created:');

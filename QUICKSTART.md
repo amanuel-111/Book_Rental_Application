@@ -1,34 +1,31 @@
-# Quick Start Guide - MAMP MySQL Setup
+# Quick Start Guide - MySQL Setup
 
-## 🚀 Get Started in 5 Minutes with MAMP
+## 🚀 Get Started in 5 Minutes
 
 ### 1. Prerequisites
-- Node.js (v16+)
-- MAMP (with MySQL running on port 3306)
+- Node.js (v18.17.0+)
+- MySQL Server (Port 3306)
 - Git
 
 ### 2. Clone & Setup
 ```bash
-git clone https://github.com/amanuel-111/Book_Rental_Application.git
+git clone https://github.com/amanuel-111/Book_Rental_Application
 cd Book_Rental_Application
 node setup.js
 ```
 
-### 3. MAMP MySQL Setup
+### 3. MySQL Database Setup
+Ensure your MySQL server is running (you can use MAMP, XAMPP, or standard MySQL).
+
 ```bash
-# 1. Start MAMP and ensure MySQL is running on port 3306
-# 2. Create database using phpMyAdmin or MySQL command line:
-
-# Via phpMyAdmin:
-# - Open http://localhost/phpMyAdmin
-# - Create new database named 'book_rental'
-
-# Via MySQL command line:
+# 1. Access MySQL command line or your preferred GUI client:
 mysql -u root -p -h localhost -P 3306
+
+# 2. Create the database:
 CREATE DATABASE book_rental;
 exit;
 
-# 3. Update backend/.env with MAMP credentials:
+# 3. Update backend/.env with your MySQL credentials:
 # DB_HOST=localhost
 # DB_PORT=3306
 # DB_NAME=book_rental
@@ -41,16 +38,25 @@ npm run seed
 ```
 
 ### 4. Start the Application
+You will need two terminals to run both parts of the application.
+
+**Backend Terminal:**
 ```bash
-# From root directory
+cd backend
 npm run dev
 ```
 
-- **Frontend**: http://localhost:3000
-- **Backend**: http://localhost:5000
-- **MAMP**: http://localhost/phpMyAdmin (database management)
+**Frontend Terminal:**
+```bash
+cd frontend
+npm run dev
+```
+
+- **Frontend**: http://localhost:3001
+- **Backend API**: http://localhost:5003
 
 ### 5. Login with Demo Accounts
+The seed script creates these accounts for development:
 
 | Role  | Email | Password |
 |-------|-------|----------|
@@ -78,66 +84,29 @@ npm run dev
 - Track rental history
 - Return books
 
-## 🔧 MAMP Troubleshooting
+## 🔧 Troubleshooting
 
 ### MySQL Connection Issues
-1. Ensure MAMP is running and MySQL port is 3306
-2. Check MAMP MySQL credentials (usually root/root)
-3. Verify database exists in phpMyAdmin
-4. Check `backend/.env` configuration
+1. Ensure MySQL is running on port 3306.
+2. Check your credentials in `backend/.env`.
+3. Verify the `book_rental` database exists.
 
 ### Port Conflicts
 ```bash
-# If ports 3000 or 5000 are in use
-npx kill-port 3000 5000
-```
-
-### MAMP MySQL Not Starting
-1. Check MAMP logs for errors
-2. Ensure no other MySQL instances are running
-3. Try changing MySQL port in MAMP preferences
-4. Update `backend/.env` with new port
-
-### Database Access Denied
-```bash
-# Reset MAMP MySQL password if needed
-# Or use MAMP's default credentials:
-# Username: root
-# Password: root (or empty)
-```
-
-## 📊 MAMP Database Management
-
-### Using phpMyAdmin
-- **URL**: http://localhost/phpMyAdmin
-- **Username**: root
-- **Password**: root (or check MAMP settings)
-
-### Direct MySQL Access
-```bash
-# Connect to MAMP MySQL
-mysql -u root -p -h localhost -P 3306
-
-# Show databases
-SHOW DATABASES;
-
-# Use book rental database
-USE book_rental;
-
-# Show tables
-SHOW TABLES;
+# If ports 3001 or 5003 are in use, you can find and kill the process or change the port in .env files
+npx kill-port 3001 5003
 ```
 
 ## 🏗️ Architecture
 
 ```
-book-rental-system/
-├── backend/          # Node.js + Express + MySQL
+Book_Rental_Application/
+├── backend/          # Node.js + Express API
 │   ├── src/
 │   │   ├── config/   # MySQL connection & schema
 │   │   ├── routes/   # API endpoints
 │   │   └── scripts/  # Database seeding
-├── frontend/         # Next.js + Material-UI
+├── frontend/         # Next.js Application
 │   ├── src/
 │   │   ├── pages/    # Application pages
 │   │   ├── components/ # Reusable components
@@ -147,12 +116,11 @@ book-rental-system/
 
 ## 📚 Key Features Implemented
 
-✅ **MySQL Database** (MAMP compatible)
+✅ **MySQL Database Integration**
 ✅ **Role-based Access Control (CASL)**
 ✅ **JWT Authentication**
 ✅ **Server-side Filtering**
-✅ **Material-UI Components**
+✅ **Custom UI Components**
 ✅ **Responsive Design**
-✅ **Production Ready**
 
 Need help? Check the full README.md for detailed documentation!

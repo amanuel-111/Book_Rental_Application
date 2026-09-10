@@ -1,6 +1,6 @@
 # 🚀 GitHub Setup Guide
 
-This guide will help you set up this Book Rental System project on GitHub.
+This guide will help you set up this Book Rental Application project on GitHub.
 
 ## 📋 Pre-Setup Checklist
 
@@ -16,19 +16,19 @@ Before pushing to GitHub, ensure:
 ```bash
 git init
 git add .
-git commit -m "Initial commit: Complete Book Rental System"
+git commit -m "Initial commit: Book Rental Application"
 ```
 
 ### 2. Create GitHub Repository
 1. Go to [GitHub](https://github.com) and create a new repository
-2. Name it: `book-rental-system` (or your preferred name)
+2. Name it: `Book_Rental_Application`
 3. **Don't** initialize with README (we already have one)
 4. Set visibility (Public/Private)
 
 ### 3. Connect Local Repository to GitHub
 ```bash
 # Replace YOUR_USERNAME and YOUR_REPO_NAME with actual values
-git remote add origin https://github.com/YOUR_USERNAME/YOUR_REPO_NAME.git
+git remote add origin https://github.com/YOUR_USERNAME/Book_Rental_Application.git
 git branch -M main
 git push -u origin main
 ```
@@ -55,7 +55,7 @@ The following files contain sensitive data and are **already gitignored**:
 Use this description for your GitHub repository:
 
 ```
-A full-stack book rental application with role-based access control (ADMIN/OWNER/USER), built with Next.js, Node.js, MySQL, and CASL authorization. Features include book management, rental system, revenue tracking, and comprehensive admin dashboard.
+A full-stack book rental application with role-based access control (ADMIN/OWNER/USER), built with Next.js, Node.js, MySQL, and CASL authorization. Features include book management, rental system, revenue tracking, and administrative dashboard.
 ```
 
 ## 🏷️ Suggested Topics/Tags
@@ -70,7 +70,6 @@ Add these topics to your GitHub repository:
 - `role-based-access`
 - `full-stack`
 - `express`
-- `rental-system`
 
 ## 📊 GitHub Features to Enable
 
@@ -84,56 +83,28 @@ Create a project board with columns:
 - 👀 Review
 - ✅ Done
 
-### 3. Wiki (Optional)
-Create wiki pages for:
-- API Documentation
-- Database Schema
-- Deployment Guide
-- User Manual
-
 ## 🚀 Deployment Setup
 
-### Vercel (Frontend)
-1. Connect your GitHub repo to Vercel
-2. Set environment variables in Vercel dashboard
-3. Deploy with automatic builds on push
+To deploy the application to a production environment:
 
-### Railway/Heroku (Backend)
-1. Connect GitHub repo
-2. Set environment variables
-3. Configure MySQL database
-4. Deploy with automatic builds
+### Frontend
+1. Connect your GitHub repo to a hosting platform (e.g., Vercel, Netlify)
+2. Set environment variables (`NEXT_PUBLIC_API_URL`)
+3. Ensure the build command is `npm run build` from the `frontend` directory
+
+### Backend
+1. Connect the repository to a Node.js hosting platform
+2. Set up a production MySQL database
+3. Configure the backend `.env` variables with the production credentials and frontend URL
+4. Ensure the start command properly executes the server from the `backend` directory
 
 ## 📋 Post-Setup Tasks
 
 After pushing to GitHub:
 
-1. **Update README badges** with your repo URL
+1. **Update README links** if needed
 2. **Create releases** for version management
 3. **Set up branch protection** for main branch
-4. **Configure GitHub Actions** (optional) for CI/CD
-5. **Add collaborators** if working in a team
-
-## 🔄 Workflow Recommendations
-
-### Branch Strategy
-```bash
-main                    # Production-ready code
-├── develop            # Integration branch
-├── feature/user-auth  # Feature branches
-├── feature/book-mgmt  # Feature branches
-└── hotfix/security    # Hotfix branches
-```
-
-### Commit Message Convention
-```bash
-feat: add user authentication system
-fix: resolve book availability calculation
-docs: update API documentation
-style: improve dashboard responsive design
-refactor: optimize database queries
-test: add unit tests for rental system
-```
 
 ## 🤝 Contributing Guidelines
 
@@ -141,17 +112,7 @@ Create a `CONTRIBUTING.md` file with:
 - Code style guidelines
 - Pull request process
 - Issue reporting templates
-- Development setup instructions
 
 ## 📄 License
 
-Consider adding a license file (`LICENSE`) - MIT License is recommended for open source projects.
-
----
-
-**🎉 Your Book Rental System is now ready for GitHub!**
-
-Remember to:
-- ⭐ Star the repository if you find it useful
-- 📢 Share it with the community
-- 🐛 Report issues and contribute improvements
+This project uses the MIT License - see the `LICENSE` file.
